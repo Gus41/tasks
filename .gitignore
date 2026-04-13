@@ -1,0 +1,93 @@
+# =========================
+
+# .NET / C#
+
+# =========================
+
+bin/
+obj/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Logs
+
+*.log
+
+# Rider / VSCode / VS
+
+.vs/
+.vscode/
+.idea/
+
+# =========================
+
+# Node / Next.js
+
+# =========================
+
+node_modules/
+.next/
+out/
+dist/
+build/
+
+# Logs
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Env files
+
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# =========================
+
+# OS files
+
+# =========================
+
+.DS_Store
+Thumbs.db
+
+# =========================
+
+# Docker
+
+# =========================
+
+docker-compose.override.yml
+
+# =========================
+
+# Database / Local data
+
+# =========================
+
+*.sqlite
+*.db
+
+# =========================
+
+# Misc
+
+# =========================
+
+coverage/
+*.coverage
+*.coveragexml
+
+# =========================
+
+# Secrets (extra safety)
+
+# =========================
+
+appsettings.Development.json
