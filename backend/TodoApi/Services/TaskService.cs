@@ -18,16 +18,20 @@ public class TaskService
         var query = _context.Tasks.AsQueryable();
 
         if (!string.IsNullOrEmpty(status))
-            query = query.Where(t => t.Status == status);
+            query = query.Where(t => t.Status.Equals(status, StringComparison.OrdinalIgnoreCase));
 
         if (!string.IsNullOrEmpty(priority))
-            query = query.Where(t => t.Priority == priority);
+            query = query.Where(t => t.Priority.Equals(priority, StringComparison.OrdinalIgnoreCase));
 
-        return await query.ToListAsync();
+        return await query
+            .OrderByDescending(t => t.CreatedAt)
+            .ToListAsync();
     }
 
     public async Task<TaskItem> Create(TaskItem task)
     {
+        task.CreatedAt = DateTime.UtcNow;
+
         _context.Tasks.Add(task);
         await _context.SaveChangesAsync();
         return task;
@@ -43,8 +47,14 @@ public class TaskService
         task.Status = updated.Status;
         task.Priority = updated.Priority;
 
-        if (updated.Status == "Completed")
+        if (updated.Status == "Completed" && task.CompletedAt == null)
+        {
             task.CompletedAt = DateTime.UtcNow;
+        }
+        else if (updated.Status != "Completed")
+        {
+            task.CompletedAt = null;
+        }
 
         await _context.SaveChangesAsync();
         return task;
