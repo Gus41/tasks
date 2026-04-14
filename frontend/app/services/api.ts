@@ -1,6 +1,10 @@
 import { Task } from "@/types/task";
 
-const API_URL = "https://expert-xylophone-r9vgr6p4qx4fx4p6-5250.app.github.dev/api";
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
+if (!API_URL) {
+  throw new Error("NEXT_PUBLIC_API_URL is not defined");
+}
 
 export type TaskPayload = Omit<Task, "id" | "createdAt">;
 
